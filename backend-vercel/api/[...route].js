@@ -1,10 +1,9 @@
-// backend-vercel/api/index.js
+// backend-vercel/api/[...route].js
 import express from "express";
 import serverless from "serverless-http";
 import cors from "cors";
 import dotenv from "dotenv";
 
-// Rutas
 import authRouter from "../src/routes/auth.js";
 import booksRouter from "../src/routes/books.js";
 import usersRouter from "../src/routes/users.js";
@@ -21,14 +20,14 @@ app.use(
   })
 );
 
-// OJO: sin /api aquí, porque Vercel ya monta este handler en /api
+// Importante: SIN "/api" acá, porque este archivo ya cuelga de /api/* en Vercel
 app.get("/health", (req, res) =>
   res.json({ ok: true, time: new Date().toISOString() })
 );
 
-// Rutas reales (quedan en /api/auth, /api/books, /api/users)
 app.use("/auth", authRouter);
 app.use("/books", booksRouter);
 app.use("/users", usersRouter);
 
+// Exportar como handler serverless
 export default serverless(app);
