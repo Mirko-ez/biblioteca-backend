@@ -7,6 +7,10 @@ import { createRefreshToken, verifyRefreshToken, rotateRefreshToken, revokeRefre
 import { isAllowedSignupDomain, isGmailOnly, isValidName, isValidPassword } from "../utils/validators.js";
 
 const router = Router();
+// 🔎 Ruta de diagnóstico para comprobar que /api/auth está montado
+router.get("/ping", (req, res) => {
+  res.json({ ok: true, scope: "auth" });
+});
 
 function signToken(user) {
   return jwt.sign(
