@@ -1,7 +1,3 @@
-// Test rápido desde el navegador
-router.get("/ping", (req, res) => {
-  res.json({ ok: true, route: "/api/auth/ping" });
-});
 
 import { Router } from "express";
 import { body, validationResult } from "express-validator";
